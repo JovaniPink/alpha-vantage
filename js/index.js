@@ -43,7 +43,7 @@ window.document.dispatchEvent(DOMContentLoaded_event);
   };
 
   myConnector.getData = function (table, doneCallback) {
-    symbol = tableau.connectionData || "IBM";
+    symbol = tableau.connectionTicker || "IBM";
     api = tableau.connectionAPI || "demo";
     $.getJSON(
       "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" +
@@ -77,6 +77,7 @@ window.document.dispatchEvent(DOMContentLoaded_event);
     $("#submitButton").click(function () {
       tableau.connectionTicker = $("#ticker").val();
       tableau.connectionAPI = $("#auth").val();
+      console.log(tableau.connectionAPI);
       tableau.connectionName = "Historical " + $("#ticker").val() + " Data";
       tableau.submit();
     });
