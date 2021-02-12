@@ -1,4 +1,6 @@
-(function () {
+const DOMContentLoaded_event = window.document.createEvent("Event");
+DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true);
+window.document.dispatchEvent(DOMContentLoaded_event)(function () {
   var myConnector = tableau.makeConnector();
 
   myConnector.getSchema = function (schemaCallback) {
