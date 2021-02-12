@@ -42,7 +42,10 @@
     symbol = tableau.connectionData || "IBM";
     api = tableau.connectionAPI || "demo";
     $.getJSON(
-      `https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=${symbol}&outputsize=full&apikey=${api}`,
+      "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" +
+        symbol +
+        "&outputsize=full&apikey=" +
+        api,
       function (resp) {
         var data = resp["Weekly Time Series"],
           tableData = [];
