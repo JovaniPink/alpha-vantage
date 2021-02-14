@@ -3,10 +3,10 @@ DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true);
 window.document.dispatchEvent(DOMContentLoaded_event);
 
 (function () {
-  var myConnector = tableau.makeConnector();
+  let myConnector = tableau.makeConnector();
 
   myConnector.getSchema = function (schemaCallback) {
-    var cols = [
+    const cols = [
       {
         id: "date",
         dataType: tableau.dataTypeEnum.date,
@@ -33,7 +33,7 @@ window.document.dispatchEvent(DOMContentLoaded_event);
       },
     ];
 
-    var tableSchema = {
+    const tableSchema = {
       id: "AlphaVantageDailyStockConnector",
       alias: "Stock Data",
       columns: cols,
@@ -43,15 +43,17 @@ window.document.dispatchEvent(DOMContentLoaded_event);
   };
 
   myConnector.getData = function (table, doneCallback) {
-    symbol = tableau.connectionTicker || "IBM";
-    api = tableau.connectionAPI || "demo";
+    symbol = JSON.parse(tableau.connectionData) || {
+      ticker: "IBM",
+      api: "demo",
+    };
     $.getJSON(
       "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" +
         symbol +
         "&outputsize=full&apikey=" +
         api,
       function (resp) {
-        var data = resp["Weekly Time Series"],
+        let data = resp["Weekly Time Series"],
           tableData = [];
 
         for (d in data) {
@@ -74,10 +76,12 @@ window.document.dispatchEvent(DOMContentLoaded_event);
   tableau.registerConnector(myConnector);
 
   $(document).ready(function () {
-    $("#submitButton").click(function () {
-      tableau.connectionTicker = $("#ticker").val();
-      tableau.connectionAPI = $("#auth").val();
-      console.log(tableau.connectionAPI);
+    $("#submitButton").click(function (event) {
+      event.preventDefault();
+      const form = document.querySelector("#alphaVantageForm");
+      const data = Object.fromEntries(new FormData(form).entries());
+      console.log(data);
+      tableau.connectionData = JSON.stringify(data);
       tableau.connectionName = "Historical " + $("#ticker").val() + " Data";
       tableau.submit();
     });

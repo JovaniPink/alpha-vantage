@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Alpha Vantage Daily Stock Connector</title>
+    <title>WDC Alpha Vantage</title>
     <meta
-      name="”description”"
+      name="description"
       content="Tableau Web Data Connector that pulls stock data from Alpha Vantage."
     />
     <meta name="robots" content="nofollow" />
@@ -18,6 +18,82 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Cache-Control" content="no-cache" />
     <link rel="canonical" href="https://jovanipink.github.io/alpha-vantage/" />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="./favicon/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="./favicon/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="./favicon/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="./favicon/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="./favicon/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="./favicon/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="./favicon/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="./favicon/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./favicon/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="./favicon/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="./favicon/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="./favicon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="./favicon/ms-icon-144x144.png"
+    />
+    <meta name="theme-color" content="#ffffff" />
     <link
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
@@ -31,69 +107,124 @@
       src="https://connectors.tableau.com/libs/tableauwdc-2.3.latest.js"
       type="text/javascript"
     ></script>
-    <style>
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: "Benton Sans", "Segoe UI", Tahoma, Geneva, Verdana,
-          sans-serif;
-      }
-
-      .form {
-        margin: 100px;
-        text-align: center;
-      }
-
-      .auth {
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        height: 20px;
-        width: 250px;
-      }
-
-      .ticker {
-        padding: 5px;
-        border: 1px solid #ccc;
-        border-radius: 3px;
-        height: 20px;
-        width: 250px;
-      }
-
-      .submit {
-        border: 1px solid #3e6c96;
-        border-radius: 3px;
-        height: 32px;
-      }
-    </style>
   </head>
 
-  <body>
-    <header>
-      <h1>Get the Stock Ticker Data from Alpha Vantage</h1>
-    </header>
-    <main>
-      <div class="form">
-        <label for="auth">Enter your Alpha Vantage API: </label>
-        <input
-          name="auth"
-          id="auth"
-          class="auth"
-          type="text"
-          placeholder="Alpha Vantage API"
-        />
-        <label for="ticker">Enter stock symbol: </label>
-        <input
-          name="ticker"
-          id="ticker"
-          class="ticker"
-          type="text"
-          placeholder="Stock Ticker"
-        />
-        <button id="submitButton" class="submit">Get Stock Data!</button>
+  <body class="bg-gray-100">
+    <main
+      class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
+    >
+      <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+        <div
+          class="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10"
+        >
+          <div class="max-w-md mx-auto">
+            <div class="flex items-center space-x-5">
+              <div
+                class="h-14 w-14 bg-yellow-200 rounded-full flex flex-shrink-0 justify-center items-center text-green-500 text-2xl font-mono"
+              >
+                AV
+              </div>
+              <div
+                class="block pl-2 font-semibold text-xl self-start text-gray-700"
+              >
+                <h2 class="leading-relaxed">WDC Alpha Vantage</h2>
+                <p class="text-sm text-gray-500 font-normal leading-relaxed">
+                  Get the Stock Ticker Data into Tableau.
+                </p>
+              </div>
+            </div>
+            <form
+              id="alphaVantageForm"
+              class="divide-y divide-gray-200"
+              enctype="multipart/form-data"
+            >
+              <div
+                class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"
+              >
+                <div class="flex flex-col">
+                  <label for="auth" class="leading-loose"
+                    >Enter your Alpha Vantage API:
+                  </label>
+                  <input
+                    name="auth"
+                    id="auth"
+                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    type="text"
+                    placeholder="Alpha Vantage API"
+                  />
+                </div>
+                <div class="flex flex-col">
+                  <label for="ticker" class="leading-loose"
+                    >Enter stock symbol:
+                  </label>
+                  <input
+                    name="ticker"
+                    id="ticker"
+                    class="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    type="text"
+                    placeholder="Stock Ticker"
+                  />
+                </div>
+                <!-- <div class="flex items-center space-x-4">
+                  <div class="flex flex-col">
+                    <label class="leading-loose">Start</label>
+                    <div class="relative focus-within:text-gray-600 text-gray-400">
+                      <input type="text" class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="25/02/2020">
+                      <div class="absolute left-3 top-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col">
+                    <label class="leading-loose">End</label>
+                    <div class="relative focus-within:text-gray-600 text-gray-400">
+                      <input type="text" class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="26/02/2020">
+                      <div class="absolute left-3 top-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="flex flex-col">
+                  <p>
+                    You must have a proper Alpha Vantage API key. You could
+                    claim your free API key at
+                    <a
+                      class="underline text-gray-200"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://www.alphavantage.co/support/#api-key"
+                      >free API key</a
+                    >.
+                  </p>
+                </div>
+              </div>
+              <div class="pt-4 flex items-center space-x-4">
+                <button
+                  id="submitButton"
+                  class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                  type="submit"
+                >
+                  Get Stock Data!
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </main>
+    <footer
+      class="bg-gray-800 text-white py-3 px-4 text-center fixed left-0 bottom-0 right-0 z-40"
+    >
+      This WDC Page Created by
+      <a
+        class="underline text-gray-200"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://twitter.com/JovaniPink"
+        >@JovaniPink</a
+      >.
+    </footer>
     <script src="./js/index.js"></script>
   </body>
 </html>
