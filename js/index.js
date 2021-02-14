@@ -43,15 +43,15 @@ window.document.dispatchEvent(DOMContentLoaded_event);
   };
 
   myConnector.getData = function (table, doneCallback) {
-    symbol = JSON.parse(tableau.connectionData) || {
+    userData = JSON.parse(tableau.connectionData) || {
+      auth: "demo",
       ticker: "IBM",
-      api: "demo",
     };
     $.getJSON(
       "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" +
-        symbol +
+        userData["ticker"] +
         "&outputsize=full&apikey=" +
-        api,
+        userData["auth"],
       function (resp) {
         let data = resp["Weekly Time Series"],
           tableData = [];
@@ -80,7 +80,6 @@ window.document.dispatchEvent(DOMContentLoaded_event);
       event.preventDefault();
       const form = document.querySelector("#alphaVantageForm");
       const data = Object.fromEntries(new FormData(form).entries());
-      console.log(data);
       tableau.connectionData = JSON.stringify(data);
       tableau.connectionName = "Historical " + $("#ticker").val() + " Data";
       tableau.submit();
