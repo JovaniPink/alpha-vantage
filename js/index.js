@@ -2,6 +2,17 @@
 // DOMContentLoaded_event.initEvent("DOMContentLoaded", true, true);
 // window.document.dispatchEvent(DOMContentLoaded_event);
 
+// let ready = (callback) => {
+//   if (document.readyState != "loading") callback();
+//   else document.addEventListener("DOMContentLoaded", callback);
+// };
+
+// ready(() => {
+//   /* Do things after DOM has fully loaded */
+//   const form = document.querySelector("#alphaVantageForm");
+//   const data = Object.fromEntries(new FormData(form).entries());
+// });
+
 (function () {
   let myConnector = tableau.makeConnector();
 
@@ -78,8 +89,10 @@
   $(document).ready(function () {
     $("#submitButton").click(function (event) {
       event.preventDefault();
-      const form = document.querySelector("#alphaVantageForm");
-      const data = Object.fromEntries(new FormData(form).entries());
+      let data = {
+        auth: $("input[name=auth]").val(),
+        ticker: $("input[name=ticker]").val(),
+      };
       tableau.connectionData = JSON.stringify(data);
       tableau.connectionName = "Historical " + $("#ticker").val() + " Data";
       tableau.submit();
