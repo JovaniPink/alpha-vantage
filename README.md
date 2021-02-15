@@ -6,7 +6,7 @@
 
 This is a repo using Tableau's Web Data Connector to pull in stock data from Alpha Vantage.
 
-Alpha Vantage offers free stock APIs in JSON and CSV formats for realtime and historical equity, forex, cryptocurrency data and over 50 technical indicators. I choose to use Alpha Vantage's API service: https://www.alphavantage.co/ with an example focusing the on the time series weekly data of gamestop (GME) https://www.alphavantage.co/documentation/#weekly
+Alpha Vantage offers free stock APIs in JSON and CSV formats for realtime and historical equity, forex, cryptocurrency data and over 50 technical indicators. I choose to use Alpha Vantage's API service: https://www.alphavantage.co/ with an example focusing the on the time series weekly data of GameStop (GME) https://www.alphavantage.co/documentation/#weekly
 
 You must have a proper Alpha Vantage API key. You could claim your free API key at <a target="_blank" rel="noopener noreferrer" href="https://www.alphavantage.co/support/#api-key">free API key</a>. Now you have access to making calls to get your data right away. Here’s the link to their <a target="_blank" rel="noopener noreferrer" href="https://www.alphavantage.co/documentation/">documentation</a>.
 
@@ -75,7 +75,7 @@ const columns = [
 
 ## Example
 
-Here is a quick example use of grabbing Gamestop weekly stocks from the beginning of 2021 and heatmap of the closing weekly price.
+Here is a quick example use of grabbing GameStop weekly stocks from the beginning of 2021 and heatmap of the closing weekly price.
 
 https://public.tableau.com/profile/jovanipink#!/vizhome/WDCAlphaVantage/AvgClosed2021
 

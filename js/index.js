@@ -17,7 +17,7 @@
   let myConnector = tableau.makeConnector();
 
   myConnector.getSchema = function (schemaCallback) {
-    const cols = [
+    const columns = [
       {
         id: "date",
         dataType: tableau.dataTypeEnum.date,
@@ -47,7 +47,7 @@
     const tableSchema = {
       id: "AlphaVantageDailyStockConnector",
       alias: "Stock Data",
-      columns: cols,
+      columns: columns,
     };
 
     schemaCallback([tableSchema]);
